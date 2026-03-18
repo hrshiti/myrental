@@ -1,80 +1,29 @@
-import apiService from './apiService';
+export const paymentService = {
+  createOrder: async (bookingId) => {
+    return {
+      success: true,
+      order: { id: 'order_' + Math.random().toString(36).substr(2, 9), amount: 500000, currency: 'INR' },
+      booking: { bookingId: bookingId || 'BK-MOCK' },
+      razorpayKeyId: 'rzp_test_mockkey123'
+    };
+  },
 
-class PaymentService {
-  /**
-   * Create Razorpay order for booking payment
-   */
-  async createOrder(bookingId) {
-    const response = await apiService.post('/payments/create-order', { bookingId });
-    return response.data;
-  }
-
-  /**
-   * Verify Razorpay payment
-   */
-  async verifyPayment(verificationData) {
-    const response = await apiService.post('/payments/verify', verificationData);
-    return response.data;
-  }
-
-  /**
-   * Process refund
-   */
-  async processRefund(bookingId, amount, reason) {
-    const response = await apiService.post(`/payments/refund/${bookingId}`, {
-      amount,
-      reason
-    });
-    return response.data;
-  }
-
-  /**
-   * Get payment details
-   */
-  async getPaymentDetails(paymentId) {
-    const response = await apiService.get(`/payments/${paymentId}`);
-    return response.data;
-  }
-
-  /**
-   * Load Razorpay script
-   */
-  loadRazorpayScript() {
+  openCheckout: async (options) => {
+    console.log('Opening mock Razorpay checkout with options:', options);
     return new Promise((resolve) => {
-      const script = document.createElement('script');
-      script.src = 'https://checkout.razorpay.com/v1/checkout.js';
-      script.onload = () => resolve(true);
-      script.onerror = () => resolve(false);
-      document.body.appendChild(script);
+      setTimeout(() => {
+        resolve({
+          razorpay_order_id: options.order_id,
+          razorpay_payment_id: 'pay_' + Math.random().toString(36).substr(2, 9),
+          razorpay_signature: 'mock_signature_123'
+        });
+      }, 500);
     });
+  },
+
+  verifyPayment: async (data) => {
+    return { success: true, message: 'Payment verified (Mock)' };
   }
+};
 
-  /**
-   * Open Razorpay checkout
-   */
-  async openCheckout(options) {
-    const loaded = await this.loadRazorpayScript();
-
-    if (!loaded) {
-      throw new Error('Razorpay SDK failed to load');
-    }
-
-    return new Promise((resolve, reject) => {
-      const rzp = new window.Razorpay({
-        ...options,
-        handler: function (response) {
-          resolve(response);
-        },
-        modal: {
-          ondismiss: function () {
-            reject(new Error('Payment cancelled by user'));
-          }
-        }
-      });
-
-      rzp.open();
-    });
-  }
-}
-
-export default new PaymentService();
+export default paymentService;

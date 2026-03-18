@@ -37,15 +37,9 @@ const UserLogin = () => {
         }
         return () => clearInterval(interval);
     }, [step, resendTimer === 0]);
-
     const handleSendOTP = async (e) => {
         e.preventDefault();
         setError('');
-
-        if (phone.length !== 10) {
-            setError('Please enter a valid 10-digit phone number');
-            return;
-        }
 
         try {
             setLoading(true);
@@ -54,18 +48,8 @@ const UserLogin = () => {
             setCanResend(false);
             setStep(2);
         } catch (err) {
-            // Check if account doesn't exist
-            if (err.response?.data?.requiresRegistration ||
-                err.response?.status === 404 ||
-                err.message?.includes('Account not found')) {
-                setError('Account not found. Redirecting to signup...');
-                setTimeout(() => {
-                    navigate('/signup', { state: { phone } });
-                }, 1500);
-            } else {
-                setError(err.message || 'Failed to send OTP');
-            }
-            console.error(err);
+            // Mock always succeeds now anyway
+            setError(err.message || 'Failed to send OTP');
         } finally {
             setLoading(false);
         }
@@ -73,7 +57,8 @@ const UserLogin = () => {
 
     const handleOTPChange = (index, value) => {
         if (value.length > 1) return;
-        if (!/^\d*$/.test(value)) return; // Only allow numbers
+        // In mock mode, we can allow anything, but keeping it simple for now
+        if (!/^\d*$/.test(value)) return; 
 
         const newOtp = [...otp];
         newOtp[index] = value;
@@ -105,46 +90,22 @@ const UserLogin = () => {
     const handleVerifyOTP = async (e) => {
         e.preventDefault();
         const otpString = otp.join('');
-        if (otpString.length !== 6) {
-            setError('Please enter complete OTP');
+        // We can be permissive here too
+        if (otpString.length === 0) {
+            setError('Please enter OTP');
             return;
         }
 
         try {
             setLoading(true);
             await authService.verifyOtp({ phone, otp: otpString });
-
-            // Update FCM Token
-            try {
-                console.log('UserLogin: Requesting notification permission...');
-                const token = await requestNotificationPermission();
-                if (token) {
-                    console.log('UserLogin: FCM Token obtained, updating backend...');
-                    await userService.updateFcmToken(token, 'web');
-                } else {
-                    console.warn('UserLogin: Notification permission denied or token is null');
-                }
-            } catch (fcmError) {
-                console.warn('UserLogin: FCM update failed', fcmError);
-            }
-
+            
             // Redirect to previous page if available
             const from = location.state?.from?.pathname || location.state?.from || '/';
             navigate(from, { replace: true });
 
         } catch (err) {
-            // Check if error is due to account not found
-            if (err.response?.data?.requiresRegistration ||
-                err.response?.status === 404 ||
-                err.message?.includes('Account not found')) {
-                setError('Account not found. Redirecting to signup...');
-                setTimeout(() => {
-                    navigate('/signup', { state: { phone } });
-                }, 1500);
-            } else {
-                setError(err.message || 'Verification failed');
-            }
-            console.error(err);
+            setError(err.message || 'Verification failed');
         } finally {
             setLoading(false);
         }
@@ -186,18 +147,17 @@ const UserLogin = () => {
                                 <form onSubmit={handleSendOTP} className="space-y-6">
                                     <div>
                                         <label className="text-[10px] uppercase tracking-wider font-bold text-gray-400 mb-2 block ml-1">
-                                            Phone Number
+                                            Phone Number / Email
                                         </label>
                                         <div className="relative">
                                             <div className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">
                                                 <Phone size={18} />
                                             </div>
                                             <input
-                                                type="tel"
+                                                type="text"
                                                 value={phone}
                                                 onChange={(e) => setPhone(e.target.value)}
-                                                placeholder="9876543210"
-                                                maxLength={10}
+                                                placeholder="Enter any phone/email"
                                                 className="w-full pl-12 pr-4 py-3.5 bg-gray-50 border-transparent rounded-2xl focus:bg-white focus:ring-2 focus:ring-emerald-100 focus:border-emerald-500 outline-none transition-all font-bold text-gray-800 text-lg placeholder:text-gray-300 shadow-sm"
                                                 required
                                             />

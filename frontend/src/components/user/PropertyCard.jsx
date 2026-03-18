@@ -109,7 +109,7 @@ const PropertyCard = ({ property, data, className = "", isSaved: initialIsSaved 
     cleanImageUrl(
       Array.isArray(item.propertyImages) ? item.propertyImages[0] : ''
     ) ||
-    'https://via.placeholder.com/400x300?text=No+Image';
+    'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&q=80&w=400';
 
   const badgeTypeKey = normalizedType || typeRaw;
 
@@ -137,7 +137,7 @@ const PropertyCard = ({ property, data, className = "", isSaved: initialIsSaved 
           className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
           onError={(e) => {
             e.target.onerror = null;
-            e.target.src = 'https://via.placeholder.com/400x300?text=No+Image';
+            e.target.src = 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&q=80&w=400';
           }}
         />
 

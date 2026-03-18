@@ -167,7 +167,7 @@ const Layout = ({ children }) => {
     return <>{children}</>;
   }
 
-  const isUserHotelDetail = /^\/hotel\/[0-9a-fA-F]{24}(\/(amenities|reviews|offers))?$/.test(location.pathname);
+  const isUserHotelDetail = /^\/hotel\/[^\/]+(\/(amenities|reviews|offers))?$/.test(location.pathname);
   const isPartnerApp = location.pathname.startsWith('/hotel') && !isUserHotelDetail;
 
   // 3. NAVBAR VISIBILITY

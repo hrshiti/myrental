@@ -42,13 +42,7 @@ const HotelLoginPage = () => {
     const handleSendOTP = async (e) => {
         e.preventDefault();
         setError('');
-
-        // Basic Phone Validation
-        if (!phone || phone.length !== 10 || !/^\d+$/.test(phone)) {
-            setError('Please enter a valid 10-digit phone number');
-            return;
-        }
-
+        
         setLoading(true);
         try {
             await authService.sendOtp(phone, 'login', 'partner');
@@ -64,7 +58,7 @@ const HotelLoginPage = () => {
 
     const handleOTPChange = (index, value) => {
         if (value.length > 1) return;
-        if (!/^\d*$/.test(value)) return; // Only numbers
+        if (!/^\d*$/.test(value)) return;
 
         const newOtp = [...otp];
         newOtp[index] = value;
@@ -87,7 +81,7 @@ const HotelLoginPage = () => {
             await authService.sendOtp(phone, 'login', 'partner');
             setResendTimer(120);
             setCanResend(false);
-            setOtp(['', '', '', '', '', '']); // Clear OTP
+            setOtp(['', '', '', '', '', '']);
             toast.success('OTP sent successfully!');
         } catch (err) {
             setError(err.message || 'Failed to resend OTP');
@@ -99,8 +93,8 @@ const HotelLoginPage = () => {
     const handleVerifyOTP = async (e) => {
         e.preventDefault();
         const otpString = otp.join('');
-        if (otpString.length !== 6) {
-            setError('Please enter complete OTP');
+        if (otpString.length === 0) {
+            setError('Please enter OTP');
             return;
         }
 
@@ -111,20 +105,6 @@ const HotelLoginPage = () => {
                 otp: otpString,
                 role: 'partner'
             });
-
-            // Update FCM Token for Partner
-            try {
-                console.log('HotelLogin: Requesting notification permission...');
-                const token = await requestNotificationPermission();
-                if (token) {
-                    console.log('HotelLogin: FCM Token obtained, updating backend...');
-                    await userService.updateFcmToken(token, 'web');
-                } else {
-                    console.warn('HotelLogin: Notification permission denied or token is null');
-                }
-            } catch (fcmError) {
-                console.warn('HotelLogin: FCM update failed', fcmError);
-            }
 
             navigate('/hotel/dashboard');
         } catch (err) {

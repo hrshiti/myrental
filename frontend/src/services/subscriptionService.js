@@ -1,64 +1,21 @@
-import axios from 'axios';
-import { axiosInstance } from '../app/admin/store/adminStore';
+const mockPlans = [
+  { _id: 'plan-1', name: 'Starter', price: 0, durationMonths: 1, features: ['List 1 Property', 'Basic Visibility', '2% Commission'] },
+  { _id: 'plan-2', name: 'Pro', price: 999, durationMonths: 6, features: ['List Up to 5 Properties', 'Prioritized Visibility', '1% Commission', 'Basic Analytics'] },
+  { _id: 'plan-3', name: 'Enterprise', price: 2999, durationMonths: 12, features: ['Unlimited Properties', 'Top-tier Visibility', '0% Commission', 'Advanced Analytics', 'Dedicated Support'] }
+];
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+export const subscriptionService = {
+  getAllPlans: async () => {
+    return { success: true, plans: mockPlans };
+  },
 
-const subscriptionService = {
-    // --- ADMIN ---
-    createPlan: async (planData) => {
-        const response = await axiosInstance.post('/subscriptions/admin/create', planData);
-        return response.data;
-    },
+  purchasePlan: async (planId) => {
+    return { success: true, message: 'Plan purchased successfully (Mock)' };
+  },
 
-    getAllPlans: async () => {
-        const response = await axiosInstance.get('/subscriptions/admin/all');
-        return response.data;
-    },
-
-    updatePlan: async (id, planData) => {
-        const response = await axiosInstance.put(`/subscriptions/admin/${id}`, planData);
-        return response.data;
-    },
-
-    deletePlan: async (id) => {
-        const response = await axiosInstance.delete(`/subscriptions/admin/${id}`);
-        return response.data;
-    },
-
-    // --- PARTNER ---
-    getActivePlans: async () => {
-        const response = await axios.get(`${API_URL}/subscriptions/plans`, {
-            withCredentials: true
-        });
-        return response.data;
-    },
-
-    getCurrentSubscription: async () => {
-        try {
-            const response = await axiosInstance.get('/subscriptions/current');
-            return response.data;
-        } catch (error) {
-            // If 401, return null subscription (user not subscribed yet)
-            if (error.response?.status === 401) {
-                return { success: true, subscription: null };
-            }
-            throw error;
-        }
-    },
-
-    createSubscriptionOrder: async (planId) => {
-        const response = await axios.post(`${API_URL}/subscriptions/checkout`, { planId }, {
-            withCredentials: true
-        });
-        return response.data;
-    },
-
-    verifySubscription: async (paymentData) => {
-        const response = await axios.post(`${API_URL}/subscriptions/verify`, paymentData, {
-            withCredentials: true
-        });
-        return response.data;
-    }
+  getCurrentSubscription: async () => {
+    return { success: true, subscription: { plan: mockPlans[1], expiresAt: '2025-01-01', status: 'active' } };
+  }
 };
 
 export default subscriptionService;
