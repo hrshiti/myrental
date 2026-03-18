@@ -150,7 +150,8 @@ export const bookingService = {
   getUserBookings: async () => ({ success: true, bookings: mockBookings }),
   getMyBookings: async (type) => mockBookings,
   getBookingDetails: async (id) => ({ success: true, booking: mockBookings[0] }),
-  createBooking: async (data) => ({ success: true, booking: { ...mockBookings[0], ...data } }),
+  createBooking: async (data) => ({ success: true, booking: { ...mockBookings[0], ...data, _id: 'b-' + Date.now() } }),
+  create: async (data) => ({ success: true, booking: { ...mockBookings[0], ...data, _id: 'b-' + Date.now() } }),
   getPartnerBookings: async () => ({ success: true, bookings: mockBookings })
 };
 
