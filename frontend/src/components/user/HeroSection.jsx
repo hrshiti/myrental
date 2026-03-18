@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Search, Menu, Wallet } from 'lucide-react';
+import logo from '../../assets/newlogo.png';
 import MobileMenu from '../../components/ui/MobileMenu';
 import { useNavigate } from 'react-router-dom';
 import walletService from '../../services/walletService';
@@ -60,11 +61,8 @@ const HeroSection = () => {
                 </button>
 
                 {/* Logo */}
-                <div className="flex flex-col items-start leading-none ml-3">
-                    <span className="text-xl font-black tracking-tighter text-slate-900 flex items-center gap-0.5">
-                        NOW<span className="text-teal-600">STAY</span>
-                    </span>
-                    <div className="h-1 w-6 bg-teal-600 rounded-full"></div>
+                <div className="flex items-center gap-2 ml-3">
+                    <img src={logo} alt="Logo" className="h-12 w-auto object-contain" />
                 </div>
 
                 <div className="flex-1" />

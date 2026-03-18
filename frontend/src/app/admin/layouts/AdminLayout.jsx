@@ -95,7 +95,7 @@ const AdminLayout = () => {
             >
                 <div className={`py-6 flex flex-col items-center justify-center bg-white border-b border-gray-100 transition-all duration-300 ${!isSidebarOpen && 'py-4'}`}>
                     <div className="flex items-center justify-center px-4">
-                        <img src={logo} alt="Logo" className={`${isSidebarOpen ? 'h-10' : 'h-6'} w-auto object-contain transition-all duration-300`} />
+                        <img src={logo} alt="Logo" className={`${isSidebarOpen ? 'h-12' : 'h-8'} w-auto object-contain transition-all duration-300`} />
                     </div>
                 </div>
 
