@@ -157,7 +157,7 @@ const MobileMenu = ({ isOpen, onClose }) => {
                     >
                         <div className="flex items-center justify-between p-5 pb-2">
                             <div className="flex items-center gap-2 group">
-                                <img src={logo} alt="Logo" className="h-10 w-auto object-contain" />
+                                <img src={logo} alt="Logo" className="h-12 w-auto object-contain" />
                             </div>
                             <button onClick={onClose} className="p-2 rounded-full bg-gray-50 hover:bg-gray-100 transition border border-gray-100">
                                 <X size={20} className="text-gray-500" />

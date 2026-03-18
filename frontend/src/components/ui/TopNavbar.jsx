@@ -14,7 +14,7 @@ const TopNavbar = () => {
             {/* Logo */}
             <Link to="/">
                 <div className="flex items-center gap-2 group">
-                    <img src={logo} alt="Logo" className="h-12 w-auto object-contain" />
+                    <img src={logo} alt="Logo" className="h-16 w-auto object-contain" />
                 </div>
             </Link>
 

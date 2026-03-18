@@ -62,7 +62,7 @@ const HeroSection = () => {
 
                 {/* Logo */}
                 <div className="flex items-center gap-2 ml-3">
-                    <img src={logo} alt="Logo" className="h-12 w-auto object-contain" />
+                    <img src={logo} alt="Logo" className="h-16 w-auto object-contain" />
                 </div>
 
                 <div className="flex-1" />
