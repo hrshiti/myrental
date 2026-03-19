@@ -1,3 +1,4 @@
+import { useEffectEvent } from 'react';
 import { hotelService, authService, userService, bookingService, reviewService } from './apiService';
 
 // Individual exports for adminService if needed
