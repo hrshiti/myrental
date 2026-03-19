@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Phone, Mail, ArrowRight, Loader2, Shield, Building2 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { authService } from '../../../services/apiService';
-import logo from '../../../assets/newlogo.png';
+import logo from '../../../assets/logo.png';
 
 const HotelLogin = () => {
     const navigate = useNavigate();

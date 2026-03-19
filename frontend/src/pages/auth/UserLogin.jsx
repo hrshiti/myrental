@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Phone, Mail, ArrowRight, Loader2, Shield } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import logo from '../../assets/newlogo.png';
+import logo from '../../assets/logo.png';
 import { authService, userService } from '../../services/apiService';
 import { requestNotificationPermission } from '../../utils/firebase';
 import toast from 'react-hot-toast';

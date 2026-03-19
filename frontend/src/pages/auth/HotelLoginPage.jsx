@@ -4,7 +4,7 @@ import { ArrowRight, Loader2, Shield } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { authService, userService } from '../../services/apiService';
 import { requestNotificationPermission } from '../../utils/firebase';
-import logo from '../../assets/newlogo.png';
+import logo from '../../assets/logo.png';
 import toast from 'react-hot-toast';
 
 const HotelLoginPage = () => {

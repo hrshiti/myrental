@@ -16,7 +16,7 @@ import { useLenis } from './app/shared/hooks/useLenis';
 import { legalService, userService } from './services/apiService';
 import adminService from './services/adminService';
 import { requestNotificationPermission, onMessageListener } from './utils/firebase';
-import logo from './assets/newlogo.png';
+import logo from './assets/logo.png';
 
 // Lazy Imports - User Pages
 const Home = React.lazy(() => import('./pages/user/Home'));

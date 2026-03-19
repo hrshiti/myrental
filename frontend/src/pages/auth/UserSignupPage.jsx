@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Phone, Mail, ArrowRight, User, CheckCircle } from 'lucide-react';
+import logo from '../../assets/logo.png';
 import { authService } from '../../services/apiService';
 import toast, { Toaster } from 'react-hot-toast';
 
@@ -157,6 +158,9 @@ const UserSignupPage = () => {
 
             {/* Header Section */}
             <div className="text-center mb-8">
+                <div className="flex justify-center mb-6">
+                    <img src={logo} alt="Logo" className="h-16 w-auto object-contain" />
+                </div>
                 <h1 className="text-3xl font-bold text-gray-900 mb-2">Create Account</h1>
                 <p className="text-gray-500">Join thousands of happy travelers</p>
             </div>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Phone, Mail, ArrowRight, Shield } from 'lucide-react';
+import logo from '../../assets/logo.png';
 import { authService } from '../../services/apiService';
 
 const UserLoginPage = () => {
@@ -90,12 +91,7 @@ const UserLoginPage = () => {
             {/* Header / Logo Section */}
             <div className="text-center mb-8">
                 <div className="flex justify-center mb-6">
-                    <div className="flex flex-col items-center">
-                        <span className="text-4xl font-black tracking-tighter text-[#111827] flex items-center gap-1">
-                            NOW<span className="text-[#009688]">STAY</span>
-                        </span>
-                        <div className="h-1 w-8 bg-[#009688] rounded-full -mt-1 shadow-sm shadow-emerald-500/20"></div>
-                    </div>
+                    <img src={logo} alt="Logo" className="h-16 w-auto object-contain" />
                 </div>
                 <h1 className="text-3xl font-bold text-gray-900 mb-2">Welcome Back</h1>
                 <p className="text-gray-500">Login to continue your journey</p>

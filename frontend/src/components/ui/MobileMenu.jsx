@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, User, Wallet, Heart, Gift, HelpCircle, FileText, Shield, ChevronRight, LogOut, Settings, BookOpen, Building, Briefcase, Bell, Edit3 } from 'lucide-react';
-import logo from '../../assets/newlogo.png';
+import logo from '../../assets/logo.png';
 import { userService } from '../../services/apiService';
 
 import { useNavigate } from 'react-router-dom';
