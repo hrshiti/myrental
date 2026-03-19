@@ -9,7 +9,7 @@ import {
     ChevronRight, Wallet, Bell, Settings, Edit3, Info, Phone, Calendar
 } from 'lucide-react';
 import usePartnerStore from '../store/partnerStore';
-import logo from '../../../assets/newlogo.png';
+import logo from '../../../assets/logo.png';
 
 const PartnerSidebar = ({ isOpen, onClose }) => {
     const navigate = useNavigate();

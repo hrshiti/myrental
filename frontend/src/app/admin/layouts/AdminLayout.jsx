@@ -6,7 +6,7 @@ import {
     Settings, Bell, Search, LogOut, Menu, X, DollarSign, ClipboardCheck, Star, Tag, FileText, MessageSquare, CircleHelp, Home, LayoutGrid, CreditCard
 } from 'lucide-react';
 
-import logo from '../../../assets/newlogo.png';
+import logo from '../../../assets/logo.png';
 import useAdminStore from '../store/adminStore';
 import toast from 'react-hot-toast';
 import adminService from '../../../services/adminService';

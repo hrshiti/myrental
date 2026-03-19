@@ -4,7 +4,7 @@ import { propertyService, hotelService } from '../../../services/apiService';
 import { categoryService } from '../../../services/categoryService';
 // Compression removed - Cloudinary handles optimization
 import { CheckCircle, FileText, Home, Image, Plus, Trash2, MapPin, Search, BedDouble, Wifi, Tv, Snowflake, Coffee, ShowerHead, ArrowLeft, ArrowRight, Clock, Loader2, Camera, X, Tent } from 'lucide-react';
-import logo from '../../../assets/newlogo.png';
+import logo from '../../../assets/logo.png';
 import { isFlutterApp, openFlutterCamera } from '../../../utils/flutterBridge';
 
 // Tent/Camping Specific Constants
